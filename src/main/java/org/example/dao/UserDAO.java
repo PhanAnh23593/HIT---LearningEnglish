@@ -116,6 +116,24 @@ public class UserDAO {
         return null;
     }
 
+    public boolean changePassword(int userId, String newPassword) {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newPassword);
+            pstmt.setInt(2, userId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
+
     private void LastLogin(int userId) {
         String sql = "UPDATE users SET last_login = NOW() WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();

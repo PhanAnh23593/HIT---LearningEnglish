@@ -13,8 +13,8 @@ public class Vocabulary {
     String word;
     String ipa;
     String meaning;
-    String Example ;
-    String ExampleMeaning;
+    String example ;
+    String exampleMeaning;
     String Audio;
     String Tag;
 
