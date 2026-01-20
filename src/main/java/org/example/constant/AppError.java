@@ -5,17 +5,23 @@ public interface AppError {
     // DAO
     String NOTFOUND_LIBRARY_MYSQL = "0001 ERROR: Không tìm thấy thư viện MySQL JDBC Driver!";
     String CONNECT_ERROR_MYSQL = "0002 ERROR: Không thể kết nối đến Database!";
-    String ERROR_EXITS = " ERROR: Dữ liệu đã tồn tại"; // Mình sửa lại chút cho đúng format
+    String ERROR_EXITS = " ERROR: Dữ liệu đã tồn tại";
 
     // AUTHSERVICE
+    String UNKNOWN_ERROR = "0028 ERROR: Không xác định ";
+    String REGISTER_FAIL = "0027 ERROR: Đăng ký thất bại ";
+
+    // AUTHSERVICE Username
     String REGISTER_USERNAME_SHORT = "0003 ERROR: Tên đăng nhập phải từ 5 ký tự trở lên!";
     String REGISTER_USERNAME_EXISTS = "0004 ERROR: Tên đăng nhập đã tồn tại!";
-    String REGISTER_USERNAME_INVALID_CHARS = "0008 ERROR: Tên đăng nhập không được chứa ký tự đặc biệt!"; // Mới
+    String REGISTER_USERNAME_INVALID_CHARS = "0008 ERROR: Tên đăng nhập không được chứa ký tự đặc biệt!";
+
 
     //AUTHSERVICE REGISTER : PASSWORD
     String REGISTER_PASSWORD_SHORT = "0005 ERROR: Mật khẩu phải từ 6 ký tự trở lên!";
-    String REGISTER_PASSWORD_NO_UPPER = "0009 ERROR: Mật khẩu phải chứa ít nhất 1 chữ hoa!"; // Mới
-    String REGISTER_PASSWORD_NO_DIGIT = "0010 ERROR: Mật khẩu phải chứa ít nhất 1 chữ số!"; // Mới
+    String REGISTER_PASSWORD_NO_UPPER = "0009 ERROR: Mật khẩu phải chứa ít nhất 1 chữ hoa!";
+    String REGISTER_PASSWORD_NO_DIGIT = "0010 ERROR: Mật khẩu phải chứa ít nhất 1 chữ số!";
+    String REGISTER_PASS_CONFIRM_WRONG = "0015 ERROR: Mật khẩu nhập lại không khớp!";
 
     // AUTHSERVICE REGISTER: EMAIL
     String REGISTER_EMAIL_INVALID = "0006 ERROR: Email không đúng định dạng!";
@@ -29,7 +35,7 @@ public interface AppError {
 
     //AUTHESERVICE LOGIN
     String LOGIN_INFO_EMPTY = "0020 ERROR: Vui lòng nhập tên đăng nhập và mật khẩu!";
-    String LOGIN_FAIL = "0021 ERROR: Sai tên đăng nhập hoặc mật khẩu, hoặc tài khoản chưa kích hoạt!";
+    String LOGIN_FAIL = "0021 ERROR: Sai tên đăng nhập hoặc mật khẩu";
     String LOGIN_REQUIRED = "0022 ERROR: Bạn cần đăng nhập để thực hiện chức năng này!";
 
 

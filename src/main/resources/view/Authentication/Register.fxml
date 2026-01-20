@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" styleClass="root-pane" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.RegisterController">
+    <children>
+        <VBox alignment="CENTER" layoutX="300.0" layoutY="20.0" prefHeight="650.0" prefWidth="450.0" styleClass="login-card" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="25.0">
+            <children>
+
+                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/logo.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </ImageView>
+
+                <Label text="ĐĂNG KÝ TÀI KHOẢN" textFill="#154c79">
+                    <font>
+                        <Font name="System Bold" size="22.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </Label>
+
+                <VBox prefWidth="100.0" spacing="12.0">
+                    <children>
+                        <TextField fx:id="RgtFullName" promptText="họ và tên đầy đủ " styleClass="input-field" />
+
+                        <TextField fx:id="RgtUsername" promptText="Tên đăng nhập (viết liền, không dấu)" styleClass="input-field" />
+
+                        <TextField fx:id="RgtEmail" promptText="Địa chỉ Email" styleClass="input-field" />
+
+                        <TextField fx:id="RgtPhone" promptText="Số điện thoại" styleClass="input-field" />
+
+                        <PasswordField fx:id="RgtPassword" promptText="Mật khẩu (Có chữ hoa, số)" styleClass="input-field" />
+
+                        <PasswordField fx:id="RgtConfirmPassword" promptText="Nhập lại mật khẩu" styleClass="input-field" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="20.0" left="40.0" right="40.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <ProgressIndicator fx:id="loadingSpinner" prefHeight="30.0" prefWidth="30.0" visible="false" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#onRegisterClick" prefHeight="45.0" prefWidth="320.0" styleClass="primary-button" text="ĐĂNG KÝ NGAY">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </Button>
+
+                <HBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label text="Đã có tài khoản?" textFill="#757575" />
+                        <Hyperlink onAction="#onLoginLinkClick" text="Đăng nhập tại đây" textFill="#154c79" />
+                    </children>
+                </HBox>
+
+            </children>
+            <padding>
+                <Insets bottom="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

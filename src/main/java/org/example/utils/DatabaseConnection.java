@@ -9,17 +9,16 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/HIT_Learning_English?useSSL=false&characterEncoding=UTF-8";
+    // Đã thêm &allowPublicKeyRetrieval=true để sửa lỗi kết nối
+    private static final String URL = "jdbc:mysql://localhost:3306/HIT_Learning_English?useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
     private static final String PASSWORD = "Anh2352006@";
-
 
     public static Connection getConnection() {
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
         } catch (ClassNotFoundException e) {
             System.err.println(AppError.NOTFOUND_LIBRARY_MYSQL);
             System.err.println(AppMessage.MESSAGE_LIBRARY_MYSQL);
@@ -31,5 +30,4 @@ public class DatabaseConnection {
         }
         return conn;
     }
-
 }

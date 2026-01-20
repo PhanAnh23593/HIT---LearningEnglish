@@ -74,7 +74,6 @@ public class UserDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);
-
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     String storedHash = rs.getString("password");
@@ -103,10 +102,7 @@ public class UserDAO {
                             user.setLastLogin(lastLoginTs.toLocalDateTime());
                         }
                         LastLogin(user.getId());
-                        LastLogin(user.getId());
                         return user;
-
-// ...
                     }
                 }
             }
@@ -129,7 +125,6 @@ public class UserDAO {
             return false;
         }
     }
-
 
 
 
