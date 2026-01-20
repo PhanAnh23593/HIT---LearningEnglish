@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="root-pane" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LoginController">
+    <children>
+        <VBox alignment="CENTER" layoutX="300.0" layoutY="50.0" prefHeight="500.0" prefWidth="400.0" styleClass="login-card" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="50.0">
+            <children>
+
+                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/logo.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </ImageView>
+
+                <Label text="HIT - Learning English" textFill="#154c79">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </Label>
+                <Label text="Đăng nhập để tiếp tục học tập" textFill="#757575">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                </Label>
+
+                <VBox prefWidth="100.0" spacing="15.0">
+                    <children>
+                        <Label text="Tên đăng nhập" textFill="#555555">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="LoginUsername" promptText="Nhập username của bạn" styleClass="input-field" />
+
+                        <Label text="Mật khẩu" textFill="#555555">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <PasswordField fx:id="LoginPassword" promptText="Nhập mật khẩu" styleClass="input-field" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="40.0" right="40.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label fx:id="lblMessage" textFill="#ff3b30" wrapText="true">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        <ProgressIndicator fx:id="loadingSpinner" prefHeight="30.0" prefWidth="30.0" visible="false" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#onLoginClick" prefHeight="40.0" prefWidth="320.0" styleClass="primary-button" text="ĐĂNG NHẬP">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </Button>
+
+                <HBox alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label text="Chưa có tài khoản?" textFill="#757575" />
+                        <Hyperlink onAction="#onRegisterClick" text="Đăng ký ngay" textFill="#154c79" />
+                    </children>
+                </HBox>
+
+            </children>
+            <padding>
+                <Insets bottom="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

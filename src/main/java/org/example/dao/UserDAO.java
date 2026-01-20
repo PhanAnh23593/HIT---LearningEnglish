@@ -74,7 +74,6 @@ public class UserDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);
-
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     String storedHash = rs.getString("password");
@@ -103,10 +102,7 @@ public class UserDAO {
                             user.setLastLogin(lastLoginTs.toLocalDateTime());
                         }
                         LastLogin(user.getId());
-                        LastLogin(user.getId());
                         return user;
-
-// ...
                     }
                 }
             }
@@ -115,6 +111,23 @@ public class UserDAO {
         }
         return null;
     }
+
+    public boolean changePassword(int userId, String newPassword) {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newPassword);
+            pstmt.setInt(2, userId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
 
     private void LastLogin(int userId) {
         String sql = "UPDATE users SET last_login = NOW() WHERE id = ?";
