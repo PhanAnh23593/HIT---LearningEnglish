@@ -14,10 +14,7 @@ public class SaveUser {
     int id;
     int usernameid;
     int vocabularyid;
-    int Status;
-    int CountCorrect;
+    int status;
+    int countCorrect;
     LocalDate date;
-
-
-
 }

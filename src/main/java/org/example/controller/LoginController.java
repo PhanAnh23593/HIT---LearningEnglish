@@ -43,7 +43,6 @@ public class LoginController {
         String password = LoginPassword.getText();
 
 
-
         lblMessage.setText("");
         loadingSpinner.setVisible(true);
         btnLogin.setDisable(true);
