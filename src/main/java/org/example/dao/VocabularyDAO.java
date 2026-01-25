@@ -25,10 +25,7 @@ public class VocabularyDAO {
     }
 
 
-
-
-    public List<Vocabulary> getVocabularyByTag(String tag)
-    {
+    public List<Vocabulary> getVocabularyByTag(String tag) {
         List<Vocabulary> VocabListByTag = new ArrayList<>();
         String sql = "select * from vocabularies where tag = ?";
         try {
@@ -41,7 +38,7 @@ public class VocabularyDAO {
                 VocabListByTag.add(getVocabularyByRs(rs));
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return VocabListByTag;
@@ -49,8 +46,8 @@ public class VocabularyDAO {
 
 
     public List<Vocabulary> getNewVocabularies(int userId, String tag) {
-        List<Vocabulary> list = new ArrayList<>();
 
+        List<Vocabulary> list = new ArrayList<>();
         String sql = "select * from vocabularies v" +
                 "where v.id not in (select s.vocab_id from SaveUser s where s.user_id = ?) " +
                 "and v.tag = ? " +
@@ -75,9 +72,21 @@ public class VocabularyDAO {
     }
 
 
+    public List<String> getAllTags() {
+        List<String> tags = new ArrayList<>();
 
+        String sql = "select distinct tag from vocabularies where tag is not null and tag != ''";
 
-
-
-
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                String tagName = rs.getString("tag");
+                tags.add(tagName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tags;
+    }
 }

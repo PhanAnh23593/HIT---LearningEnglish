@@ -54,3 +54,16 @@
     -fx-text-fill: #4ca1af; /* Đổi màu sáng hơn khi hover */
     -fx-underline: true;
 }
+
+
+.button:hover {
+    -fx-background-color: #27ae60; /* Màu xanh đậm hơn khi di chuột */
+    -fx-scale-x: 1.05; /* Phóng to nhẹ */
+    -fx-scale-y: 1.05;
+}
+
+.combo-box {
+    -fx-background-color: #ecf0f1;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5;
+}

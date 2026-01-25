@@ -115,7 +115,7 @@ public class LoginController {
 
     private void switchToDashboard() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard/DashBoard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(root));
