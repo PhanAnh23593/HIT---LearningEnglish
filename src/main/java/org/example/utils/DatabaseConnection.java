@@ -9,7 +9,6 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    // Đã thêm &allowPublicKeyRetrieval=true để sửa lỗi kết nối
     private static final String URL = "jdbc:mysql://localhost:3306/HIT_Learning_English?useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
     private static final String PASSWORD = "Anh2352006@";

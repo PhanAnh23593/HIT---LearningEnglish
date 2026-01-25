@@ -6,6 +6,7 @@ module org.example {
 
     // THÊM DÒNG NÀY ĐỂ SỬA LỖI
     requires jbcrypt;
+    requires mysql.connector.j;
 
     opens org.example to javafx.fxml;
     opens org.example.controller to javafx.fxml;
