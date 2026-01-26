@@ -3,6 +3,7 @@ package org.example.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,6 +19,9 @@ public class User {
     String email;
     String phoneNumber;
     String avatar;
+    boolean firstlogin;
+    String major;
+    LocalDate birthday;
     String role;
     int status;
     LocalDateTime createdAt;

@@ -67,14 +67,16 @@ public class LoginController {
             User user = loginTask.getValue();
             UserSession.currentUser = user;
 
-
             lblMessage.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
             lblMessage.setText(AppSuccsess.LOGIN_SUCCESS);
 
             // Tạo 0.5s trễ
             PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-            pause.setOnFinished(e -> switchToDashboard());
-            pause.play();
+            if (user.isFirstlogin()) {
+                switchToIntroduce();
+            } else {
+                switchToDashboard();
+            }
         });
 
 
@@ -88,6 +90,9 @@ public class LoginController {
         });
 
         new Thread(loginTask).start();
+
+
+
     }
 
 
@@ -125,4 +130,18 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
+    private void switchToIntroduce() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard/Introduce.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Introduce");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

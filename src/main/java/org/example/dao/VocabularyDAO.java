@@ -49,7 +49,7 @@ public class VocabularyDAO {
 
         List<Vocabulary> list = new ArrayList<>();
         String sql = "select * from vocabularies v" +
-                "where v.id not in (select s.vocab_id from SaveUser s where s.user_id = ?) " +
+                " where v.id not in (select s.vocab_id from SaveUser s where s.user_id = ?) " +
                 "and v.tag = ? " +
                 "order by rand() LIMIT ?";
 
