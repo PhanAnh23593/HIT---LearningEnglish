@@ -84,7 +84,7 @@ public class UserDAO {
                         user.setFullName(rs.getString("full_name"));
                         user.setEmail(rs.getString("email"));
                         user.setAvatar(rs.getString("avatar"));
-                        user.setFirstlogin(rs.getBoolean("firt_login"));
+                        user.setFirstlogin(rs.getBoolean("first_login"));
                         if(rs.getDate("birthday")!= null){
                             user.setBirthday(rs.getDate("birthday").toLocalDate());
                         }

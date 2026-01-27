@@ -74,16 +74,20 @@ public class IntroduceController {
         File selectFile = fc.showOpenDialog(FullnameUser.getScene().getWindow());
 
 
-        if(selectFile != null){
+        if (selectFile != null) {
             Image img = new Image(selectFile.toURI().toString());
             Avatar.setImage(img);
+
+            SelectAvartar = selectFile.getAbsolutePath();
+
+
+            double width = Avatar.getFitWidth();
+            double height = Avatar.getFitHeight();
+            double diameter = Math.min(width, height);
+            double radius = diameter / 2;
+            Circle clip = new Circle(radius, radius, radius);
+            Avatar.setClip(clip);
         }
-
-        SelectAvartar = selectFile.getAbsolutePath();
-
-        double radius = Avatar.getFitWidth() ;
-        Circle clip = new Circle(radius, radius, radius);
-        Avatar.setClip(clip);
 
     }
 
@@ -127,7 +131,7 @@ public class IntroduceController {
 
         }catch(Exception e){
             e.printStackTrace();
-            showAlert("ERROR","App đang bảo trì...");
+            showAlert("ERROR","Dashboard đang bảo trì...");
         }
 
 

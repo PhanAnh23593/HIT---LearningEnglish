@@ -23,9 +23,8 @@
     -fx-background-color: white;
 }
 
-/* 4. Nút Đăng nhập (Primary Button) */
 .primary-button {
-    -fx-background-color: #154c79; /* Màu xanh logo */
+    -fx-background-color: #154c79;
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -33,32 +32,30 @@
     -fx-cursor: hand;
 }
 
-/* Hiệu ứng di chuột vào nút */
+
 .primary-button:hover {
-    -fx-background-color: #0d3252; /* Đậm hơn */
+    -fx-background-color: #0d3252;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
 }
 
-/* Hiệu ứng khi bấm nút */
 .primary-button:pressed {
     -fx-background-color: #0a263f;
 }
 
-/* 5. Hyperlink (Link đăng ký/quên mật khẩu) */
 .hyperlink {
     -fx-border-color: transparent;
     -fx-underline: false;
 }
 
 .hyperlink:hover {
-    -fx-text-fill: #4ca1af; /* Đổi màu sáng hơn khi hover */
+    -fx-text-fill: #4ca1af;
     -fx-underline: true;
 }
 
 
 .button:hover {
-    -fx-background-color: #27ae60; /* Màu xanh đậm hơn khi di chuột */
-    -fx-scale-x: 1.05; /* Phóng to nhẹ */
+    -fx-background-color: #27ae60;
+    -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
 

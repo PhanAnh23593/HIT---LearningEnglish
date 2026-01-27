@@ -61,7 +61,7 @@
                             <image>
                                 <Image url="@../../images/first_avatar.png" />
                             </image>
-
+                            
                         </ImageView>
                         <Button onAction="#ChooseAvata" style="-fx-background-color: #f1f2f6; -fx-background-radius: 50; -fx-cursor: hand;" text="📷" StackPane.alignment="BOTTOM_RIGHT">
                             <StackPane.margin>

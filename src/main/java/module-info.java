@@ -4,7 +4,7 @@ module org.example {
     requires java.sql;
     requires static lombok;
 
-    // THÊM DÒNG NÀY ĐỂ SỬA LỖI
+
     requires jbcrypt;
     requires mysql.connector.j;
 

@@ -1,0 +1,49 @@
+
+.root {
+    -fx-font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    -fx-background-color: #f4f7f6;
+}
+
+.sidebar {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 2, 0);
+}
+
+.profile-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.profile-major {
+    -fx-font-size: 14px;
+    -fx-text-fill: #95a5a6;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #546e7a;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12 20 12 20;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #4facfe;
+    -fx-padding: 12 20 12 25;
+}
+
+.logout-button {
+    -fx-text-fill: #e74c3c;
+}
+
+
+.logout-button:hover {
+    -fx-background-color: #ffebee;
+    -fx-text-fill: #c0392b;
+}
