@@ -13,23 +13,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="950.0" stylesheets="@../../css/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="950.0" stylesheets="@../../css/dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashboardController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="240.0" spacing="20.0" styleClass="sidebar" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="80.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../images/logo.png" />
-                    </image>
-                    <VBox.margin>
-                        <Insets top="30.0" />
-                    </VBox.margin>
-                </ImageView>
+            <VBox prefHeight="131.0" prefWidth="240.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="240.0">
+                     <children>
+                            <ImageView fitHeight="80.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../images/logo.png" />
+                                </image>
+                                <VBox.margin>
+                                    <Insets top="30.0" />
+                                </VBox.margin>
+                            </ImageView>
+                        <Label styleClass="profile-name" text="HIT_ENGLISH" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
 
                 <VBox alignment="CENTER" spacing="8.0">
                     <children>
-                        <ImageView fx:id="imgAvatarMini" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgAvatar" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../images/first_avatar.png" />
                             </image>
@@ -39,7 +48,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label fx:id="lblMajor" styleClass="profile-major" text="Chuyên ngành: CNTT" />
+                        <Label fx:id="lblMajor" prefHeight="18.0" prefWidth="132.0" styleClass="profile-major" text="Chuyên ngành: CNTT" />
                     </children>
                     <VBox.margin>
                         <Insets top="20.0" />
@@ -48,14 +57,18 @@
 
                 <VBox spacing="15.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#onEditProfile" prefHeight="50.0" prefWidth="200.0" styleClass="menu-button" text="👤  Hồ sơ cá nhân">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+      
+                              <Button mnemonicParsing="false" onAction="#onLogout" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #2C3E50;" styleClass="menu-button, logout-button" text="  🚪  Đăng xuất">
+                                  <VBox.margin>
+                                      <Insets top="20.0" />
+                                  </VBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onEditProfile" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #f4F6F8;" styleClass="menu-button" text="👤  Hồ sơ cá nhân">
                         </Button>
-
-                        <Button mnemonicParsing="false" onAction="#onLogout" prefHeight="50.0" prefWidth="200.0" styleClass="menu-button, logout-button" text="🚪  Đăng xuất">
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
-                        </Button>
+                     </children>
+                  </VBox>
                     </children>
                     <padding>
                         <Insets top="40.0" />
@@ -76,7 +89,7 @@
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Chào mừng trở lại," textFill="#95a5a6">
+                        <Label text="Chào mừng bạn vào học," textFill="#95a5a6">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -132,7 +145,7 @@
                             </effect>
                         </Button>
 
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#onReading" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Luyện Đọc" textFill="#2c3e50" GridPane.rowIndex="1">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#onText" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Kiểm tra" textFill="#2c3e50" GridPane.rowIndex="1">
                             <graphic>
                                 <Label text="📖">
                                     <font>

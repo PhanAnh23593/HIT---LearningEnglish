@@ -40,7 +40,7 @@ public class SaveUserDAO {
             ps.setInt(4,1);
             ps.setDate(5, Date.valueOf(LocalDate.now()));
             int check = ps.executeUpdate();
-            return  check>0;
+            return  check > 0;
         }catch(Exception e){
             e.printStackTrace();
             return false;

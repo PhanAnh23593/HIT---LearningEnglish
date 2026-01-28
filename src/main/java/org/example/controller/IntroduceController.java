@@ -77,10 +77,7 @@ public class IntroduceController {
         if (selectFile != null) {
             Image img = new Image(selectFile.toURI().toString());
             Avatar.setImage(img);
-
             SelectAvartar = selectFile.getAbsolutePath();
-
-
             double width = Avatar.getFitWidth();
             double height = Avatar.getFitHeight();
             double diameter = Math.min(width, height);
@@ -122,8 +119,6 @@ public class IntroduceController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DashBoard/DashBoard.fxml"));
             Parent root = loader.load();
-
-
             Stage stage = (Stage) FullnameUser.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("DashBoard");
