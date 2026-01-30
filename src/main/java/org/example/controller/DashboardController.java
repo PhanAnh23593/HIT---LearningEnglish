@@ -6,9 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.example.constant.AppError;
+import org.example.model.User;
+import org.example.utils.UserSession;
 
+import java.io.File;
 import java.io.IOException;
 
 public class DashboardController {
@@ -21,6 +27,44 @@ public class DashboardController {
 
     @FXML
     private Label lblUsername;
+
+
+    @FXML
+    public void initialize(){
+        try {
+            User currentUser = UserSession.currentUser;
+            if(currentUser == null ) { throw new Exception(AppError.LOAD_IDUSER_FAIL); }
+
+            String avatarPath = currentUser.getAvatar();
+            Image imageToLoad = null;
+
+            if (avatarPath != null && !avatarPath.isEmpty()) {
+                File file = new File(avatarPath);
+                if (file.exists()) {
+                    String localUrl = file.toURI().toString();
+                    imageToLoad = new Image(localUrl);
+                }
+                else if (!file.isAbsolute()) {
+                    try {
+                        imageToLoad = new Image(getClass().getResourceAsStream("/images/" + avatarPath));
+                    } catch (Exception e) {
+                        System.err.println("Không tìm thấy ảnh resource: " + avatarPath);
+                    }
+                }
+            }
+            if (imageToLoad == null) {
+                imageToLoad = new Image(getClass().getResourceAsStream("/images/default.png"));
+            }
+            imgAvatar.setImage(imageToLoad);
+            double radius = imgAvatar.getFitWidth() / 2;
+            Circle clip = new Circle(radius, radius, radius);
+            imgAvatar.setClip(clip);
+            lblUsername.setText(currentUser.getFullName());
+            lblMajor.setText("Chuyên ngành " + currentUser.getMajor());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
     @FXML
@@ -43,7 +87,18 @@ public class DashboardController {
 
     @FXML
     void onLogout() {
+        try {
+            UserSession.currentUser = null;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Authentication/Login.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("LOGIN");
+            stage.centerOnScreen();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

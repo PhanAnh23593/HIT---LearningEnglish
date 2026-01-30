@@ -17,7 +17,4 @@ public class Vocabulary {
     String exampleMeaning;
     String Audio;
     String Tag;
-
-
-
 }

@@ -43,4 +43,11 @@ public interface AppError {
     String CHANGE_PASS_EMPTY = "0023 ERROR: Vui lòng nhập đầy đủ thông tin!";
     String CHANGE_PASS_OLD_WRONG = "0024 ERROR: Mật khẩu cũ không chính xác!";
     String CHANGE_PASS_DUPLICATE = "0025 ERROR: Mật khẩu mới không được trùng với mật khẩu cũ!";
+
+
+
+    //LEARNING
+    String LOAD_IDUSER_FAIL = "0026 ERROR: Load ID người dùng thất bại ";
+    String LOAD_VOCABUSER_FAIL = "0027 ERROR: Load từ vựng của người dùng thất bại ";
+    String INDEX_INVALLID = "0028 ERROR: Index không hợp lệ ";
 }

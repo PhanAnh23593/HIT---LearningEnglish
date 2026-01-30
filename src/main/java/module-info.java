@@ -3,7 +3,7 @@ module org.example {
     requires javafx.fxml;
     requires java.sql;
     requires static lombok;
-
+    requires javafx.media;
 
     requires jbcrypt;
     requires mysql.connector.j;

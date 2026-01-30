@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f0f2f5;" stylesheets="@../../css/learning.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LearningController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f0f2f5;" stylesheets="@../../css/learning.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LearningController">
 
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="70.0" styleClass="header-box" style="-fx-padding: 0 30;">
+        <HBox alignment="CENTER_LEFT" prefHeight="70.0" style="-fx-padding: 0 30;" styleClass="header-box">
             <children>
                 <Button mnemonicParsing="false" onAction="#onBackToDashboard" styleClass="back-button" text="← Dashboard" />
                 <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Learning Vocabulary" textFill="#2c3e50" HBox.hgrow="ALWAYS">
@@ -39,17 +39,17 @@
             </padding>
             <children>
 
-                <VBox fx:id="backCard" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="15.0" styleClass="flash-card" visible="false">
+                      <VBox fx:id="backCard" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="15.0" styleClass="flash-card">
                     <children>
                         <Label styleClass="section-title" text="Ví dụ (Example):" />
-                        <Label fx:id="lblExample" alignment="CENTER" styleClass="example-sentence" text="&quot;The sorting algorithm is very efficient.&quot;" textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="lbExample" alignment="CENTER" styleClass="example-sentence" text="&quot;The sorting algorithm is very efficient.&quot;" textAlignment="CENTER" wrapText="true" />
                         <Separator prefWidth="200.0">
                             <VBox.margin>
                                 <Insets left="50.0" right="50.0" />
                             </VBox.margin>
                         </Separator>
                         <Label styleClass="section-title" text="Nghĩa ví dụ:" />
-                        <Label fx:id="lblExampleMeaning" alignment="CENTER" styleClass="example-meaning" text="Thuật toán sắp xếp này rất hiệu quả." textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="lbExampleMeaning" alignment="CENTER" styleClass="example-meaning" text="Thuật toán sắp xếp này rất hiệu quả." textAlignment="CENTER" wrapText="true" />
                     </children>
                     <effect>
                         <DropShadow color="#00000033" offsetY="5.0" radius="15.0" />
@@ -60,12 +60,12 @@
                     <children>
                         <HBox alignment="CENTER" spacing="15.0">
                             <children>
-                                <Label fx:id="lblWord" styleClass="word-text" text="Algorithm" />
+                                <Label fx:id="lbWord" styleClass="word-text" text="Algorithm" />
                                 <Button fx:id="btnAudio" mnemonicParsing="false" onAction="#playAudio" styleClass="audio-button" text="🔊" />
                             </children>
                         </HBox>
 
-                        <Label fx:id="lblIpa" styleClass="ipa-text" text="/ˈæl.ɡə.rɪ.ðəm/" />
+                        <Label fx:id="lbIpa" styleClass="ipa-text" text="/ˈæl.ɡə.rɪ.ðəm/" />
 
                         <Separator prefWidth="200.0">
                             <VBox.margin>
@@ -73,7 +73,7 @@
                             </VBox.margin>
                         </Separator>
 
-                        <Label fx:id="lblMeaning" alignment="CENTER" styleClass="meaning-text" text="Thuật toán" textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="lbMeaning" alignment="CENTER" styleClass="meaning-text" text="Thuật toán" textAlignment="CENTER" wrapText="true" />
                     </children>
                     <effect>
                         <DropShadow color="#00000033" offsetY="5.0" radius="15.0" />
@@ -87,11 +87,11 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="80.0" spacing="30.0" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onAction="#onPreviousCard" styleClass="nav-button, outline-button" text="← Trước đó" />
+                <Button fx:id="btnpass" mnemonicParsing="false" onAction="#onPassCard" styleClass="nav-button, outline-button" text="← Trước đó" />
 
                 <Button fx:id="btnFlip" mnemonicParsing="false" onAction="#onFlipCard" prefHeight="50.0" prefWidth="120.0" styleClass="flip-main-button" text="🔄 Lật thẻ" />
 
-                <Button mnemonicParsing="false" onAction="#onNextCard" styleClass="nav-button, primary-button" text="Tiếp theo →" />
+                <Button fx:id="btnnext" mnemonicParsing="false" onAction="#onNextCard" styleClass="nav-button, primary-button" text="Tiếp theo →" />
             </children>
             <padding>
                 <Insets bottom="20.0" />

@@ -46,7 +46,6 @@ public class VocabularyDAO {
 
 
     public List<Vocabulary> getNewVocabularies(int userId, String tag) {
-
         List<Vocabulary> list = new ArrayList<>();
         String sql = "select * from vocabularies v" +
                 " where v.id not in (select s.vocab_id from SaveUser s where s.user_id = ?) " +
