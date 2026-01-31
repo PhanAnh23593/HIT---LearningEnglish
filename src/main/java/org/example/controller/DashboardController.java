@@ -11,11 +11,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.example.constant.AppError;
+import org.example.constant.AppMessage;
 import org.example.model.User;
 import org.example.utils.UserSession;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+
+import static org.example.utils.UserSession.currentUser;
 
 public class DashboardController {
 
@@ -74,6 +78,21 @@ public class DashboardController {
     @FXML
     void onLearnVocabulary() {
         try {
+            User currentUser = UserSession.currentUser;
+            LocalDate today = java.time.LocalDate.now();
+            LocalDate lastDate = currentUser.getLastLearningDate();
+
+            if (lastDate != null && lastDate.equals(today)) {
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                alert.setTitle("Alert");
+                alert.setHeaderText(AppMessage.ALERT_COMPLETE1);
+                alert.setContentText(AppMessage.ALERT_COMPLETE2);
+                alert.showAndWait();
+                return;
+            }
+
+
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Learning/LearningVocab.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) lblUsername.getScene().getWindow();
@@ -88,7 +107,7 @@ public class DashboardController {
     @FXML
     void onLogout() {
         try {
-            UserSession.currentUser = null;
+            currentUser = null;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Authentication/Login.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) lblUsername.getScene().getWindow();

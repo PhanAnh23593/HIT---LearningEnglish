@@ -14,4 +14,9 @@ public interface AppSuccsess {
 
     // UPDATE PROFILE
     String UPDATE_PROFILE_SUCCESS = "Cập nhật thông tin thành công!";
+
+
+
+    //LEARNING
+    String COMPLETE_LEARNING = "Chúc mừng! Bạn đã hoàn thành bài học hôm nay.";
 }

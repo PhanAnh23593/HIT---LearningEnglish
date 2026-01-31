@@ -27,4 +27,5 @@ public class User {
     LocalDateTime createdAt;
     LocalDateTime updateAt;
     LocalDateTime lastLogin;
+    LocalDate lastLearningDate;
 }

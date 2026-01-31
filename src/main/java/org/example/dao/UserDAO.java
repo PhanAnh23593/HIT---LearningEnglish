@@ -85,6 +85,7 @@ public class UserDAO {
                         user.setEmail(rs.getString("email"));
                         user.setAvatar(rs.getString("avatar"));
                         user.setFirstlogin(rs.getBoolean("first_login"));
+                        user.setMajor("major");
                         if(rs.getDate("birthday")!= null){
                             user.setBirthday(rs.getDate("birthday").toLocalDate());
                         }
@@ -102,6 +103,9 @@ public class UserDAO {
                         java.sql.Timestamp lastLoginTs = rs.getTimestamp("last_login");
                         if (lastLoginTs != null) {
                             user.setLastLogin(lastLoginTs.toLocalDateTime());
+                        }
+                        if (rs.getDate("last_learning_date") != null) {
+                            user.setLastLearningDate(rs.getDate("last_learning_date").toLocalDate());
                         }
                         LastLogin(user.getId());
                         return user;
@@ -167,6 +171,21 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+
+
+
+    public void updateLastLearningDate(int userId) {
+        String sql = "UPDATE users SET last_learning_date = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            pstmt.setInt(2, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
