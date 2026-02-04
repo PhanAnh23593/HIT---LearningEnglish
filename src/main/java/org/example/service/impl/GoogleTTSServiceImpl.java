@@ -31,16 +31,15 @@ public class GoogleTTSServiceImpl implements GoogleTTSService {
     public String getAudioPath(String audioFileName) {
         if (audioFileName == null || audioFileName.trim().isEmpty()) return null;
 
+
+
         try {
             String safeFileName = audioFileName.replaceAll("[^a-zA-Z0-9]", "") + ".mp3";
             String filePath = CACHE_DIR + safeFileName;
             File audioFile = new File(filePath);
             if (audioFile.exists()) {
-                System.out.println("Using cached audio: " + filePath);
                 return audioFile.toURI().toString();
             }
-
-            System.out.println("Downloading audio for: " + audioFileName);
 
             String encodedText = URLEncoder.encode(audioFileName , StandardCharsets.UTF_8);
             String fullUrl = GOOGLE_TRANSLATE_URL + encodedText;
@@ -60,17 +59,11 @@ public class GoogleTTSServiceImpl implements GoogleTTSService {
                     while ((bytesRead = in.read(buffer)) != -1) {
                         out.write(buffer, 0, bytesRead);
                     }
-
-                    System.out.println("Downloaded successfully: " + filePath);
                     return audioFile.toURI().toString();
                 }
-            } else {
-                System.err.println("Google TTS Error: Response Code " + conn.getResponseCode());
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Lỗi khi tải âm thanh: " + e.getMessage());
         }
         return null;
     }

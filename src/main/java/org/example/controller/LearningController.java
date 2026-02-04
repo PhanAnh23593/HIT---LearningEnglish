@@ -13,6 +13,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -116,7 +117,6 @@ public class LearningController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            showAlertComplete("Lỗi hệ thống: " + e.getMessage());
         }
     }
 
@@ -248,7 +248,26 @@ public class LearningController {
 
     @FXML
     void playAudio() {
+        if (listvocabtoday == null || listvocabtoday.isEmpty()) return;
 
+        Vocabulary currentVocab = listvocabtoday.get(indextoday);
+        String audioUrl = currentVocab.getAudio();
+        if (audioUrl == null || audioUrl.isEmpty()) {
+            audioUrl = ggttservice.getAudioPath(currentVocab.getWord());
+        }
+        if (audioUrl != null) {
+            try {
+                if (media != null) { media.stop(); media.dispose(); }
+                if (!audioUrl.startsWith("http") && !audioUrl.startsWith("file:")) {
+                    java.io.File file = new java.io.File(audioUrl);
+                    audioUrl = file.toURI().toString();
+                }
+                media = new MediaPlayer(new Media(audioUrl));
+                media.play();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void showAlertComplete(String message) {

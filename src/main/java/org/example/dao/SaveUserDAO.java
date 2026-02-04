@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 public class SaveUserDAO {
 
+
     public boolean CheckUserExits(int usernameid, int vocabularyid) {
         String sql = "select 1 from SaveUser where user_id = ? and vocab_id = ?";
         try{

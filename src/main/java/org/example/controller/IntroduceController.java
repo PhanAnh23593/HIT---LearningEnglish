@@ -60,8 +60,6 @@ public class IntroduceController {
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
     }
 
     @FXML
@@ -69,8 +67,6 @@ public class IntroduceController {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choose Avatar");
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("ImageFiles","*.jpg","*.jpeg","*.png"));
-
-
         File selectFile = fc.showOpenDialog(FullnameUser.getScene().getWindow());
 
 
@@ -99,10 +95,8 @@ public class IntroduceController {
         }
 
         if (userDao.FirstLogin(userId, SelectAvartar, birthDay, selectedMajor)) {
-
             UserSession.currentUser.setAvatar(SelectAvartar);
             UserSession.currentUser.setBirthday(birthDay);
-            UserSession.currentUser.setFirstlogin(false);
             UserSession.currentUser.setMajor(selectedMajor);
 
 
@@ -128,8 +122,6 @@ public class IntroduceController {
             e.printStackTrace();
             showAlert("ERROR","Dashboard đang bảo trì...");
         }
-
-
     }
 
 

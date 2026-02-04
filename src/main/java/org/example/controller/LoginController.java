@@ -70,7 +70,6 @@ public class LoginController {
             lblMessage.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
             lblMessage.setText(AppSuccsess.LOGIN_SUCCESS);
 
-            // Tạo 0.5s trễ
             PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
             if (user.isFirstlogin()) {
                 switchToIntroduce();

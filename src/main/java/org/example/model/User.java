@@ -11,6 +11,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
+
+
+
+
 public class User {
     int id;
     String username;

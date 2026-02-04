@@ -12,6 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.example.constant.AppError;
 import org.example.constant.AppMessage;
+import org.example.dao.UserDAO;
 import org.example.model.User;
 import org.example.utils.UserSession;
 
@@ -27,11 +28,17 @@ public class DashboardController {
     private ImageView imgAvatar;
 
     @FXML
+    private Label lbmessage;
+
+    @FXML
     private Label lblMajor;
 
     @FXML
     private Label lblUsername;
 
+
+
+    private final UserDAO userDAO = new UserDAO();
 
     @FXML
     public void initialize(){
@@ -52,10 +59,13 @@ public class DashboardController {
                     try {
                         imageToLoad = new Image(getClass().getResourceAsStream("/images/" + avatarPath));
                     } catch (Exception e) {
-                        System.err.println("Không tìm thấy ảnh resource: " + avatarPath);
+                        e.printStackTrace();
                     }
                 }
             }
+
+
+
             if (imageToLoad == null) {
                 imageToLoad = new Image(getClass().getResourceAsStream("/images/default.png"));
             }
@@ -65,9 +75,31 @@ public class DashboardController {
             imgAvatar.setClip(clip);
             lblUsername.setText(currentUser.getFullName());
             lblMajor.setText("Chuyên ngành " + currentUser.getMajor());
+
+            LocalDate today = java.time.LocalDate.now();
+            LocalDate lastDate = currentUser.getLastLearningDate();
+            User currentUserTest = UserSession.currentUser;
+
+            if( currentUserTest.isFirstlogin()){
+                currentUserTest.setFirstlogin(false);
+                lbmessage.setText(AppMessage.ALERT_FIRSTLOGIN);
+            }
+            else if (lastDate != null && lastDate.equals(today)) {
+                lbmessage.setText(AppMessage.ALERT_COMPLETE4);
+            }
+            else {
+                lbmessage.setText(AppMessage.ALERT_NOT_COMPLETE4);
+            }
+
+
+
         }catch(Exception e){
             e.printStackTrace();
         }
+
+
+
+
     }
 
 
