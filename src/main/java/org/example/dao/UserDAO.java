@@ -2,13 +2,11 @@ package org.example.dao;
 
 import org.example.constant.AppError;
 import org.example.model.User;
-import org.example.utils.DatabaseConnection; // Lưu ý import đúng package của bạn
+import org.example.utils.DatabaseConnection;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 
 public class UserDAO {
 
@@ -86,6 +84,11 @@ public class UserDAO {
                         user.setFullName(rs.getString("full_name"));
                         user.setEmail(rs.getString("email"));
                         user.setAvatar(rs.getString("avatar"));
+                        user.setFirstlogin(rs.getBoolean("first_login"));
+                        user.setMajor(rs.getString("major"));
+                        if(rs.getDate("birthday")!= null){
+                            user.setBirthday(rs.getDate("birthday").toLocalDate());
+                        }
                         user.setRole(rs.getString("role"));
                         user.setStatus(rs.getInt("status"));
                         user.setPhoneNumber(rs.getString("phone_number"));
@@ -100,6 +103,9 @@ public class UserDAO {
                         java.sql.Timestamp lastLoginTs = rs.getTimestamp("last_login");
                         if (lastLoginTs != null) {
                             user.setLastLogin(lastLoginTs.toLocalDateTime());
+                        }
+                        if (rs.getDate("last_learning_date") != null) {
+                            user.setLastLearningDate(rs.getDate("last_learning_date").toLocalDate());
                         }
                         LastLogin(user.getId());
                         return user;
@@ -134,6 +140,49 @@ public class UserDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public boolean FirstLogin(int userId, String avatar, LocalDate birthday, String major) {
+        String sql = "UPDATE users SET avatar = ?, birthday = ?, major = ?, first_login = 0 WHERE id = ?";
+
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, avatar);
+
+            if (birthday != null) {
+                ps.setDate(2, Date.valueOf(birthday));
+            } else {
+                ps.setNull(2, java.sql.Types.DATE);
+            }
+
+            ps.setString(3, major);
+
+            ps.setInt(4, userId);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
+    public void updateLastLearningDate(int userId) {
+        String sql = "UPDATE users SET last_learning_date = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            pstmt.setInt(2, userId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

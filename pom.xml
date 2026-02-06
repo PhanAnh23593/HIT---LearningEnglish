@@ -56,8 +56,17 @@
             <version>1.18.30</version> <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>21</version>
+        </dependency>
+
 
     </dependencies>
+
+
+
 
 
 </project>

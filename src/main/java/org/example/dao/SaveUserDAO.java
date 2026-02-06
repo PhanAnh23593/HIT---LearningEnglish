@@ -12,8 +12,9 @@ import java.time.LocalDate;
 
 public class SaveUserDAO {
 
+
     public boolean CheckUserExits(int usernameid, int vocabularyid) {
-        String sql = "select 1 from SaveUser where usernameid = ? and vocabularyid = ?";
+        String sql = "select 1 from SaveUser where user_id = ? and vocab_id = ?";
         try{
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
@@ -40,7 +41,7 @@ public class SaveUserDAO {
             ps.setInt(4,1);
             ps.setDate(5, Date.valueOf(LocalDate.now()));
             int check = ps.executeUpdate();
-            return  check>0;
+            return  check > 0;
         }catch(Exception e){
             e.printStackTrace();
             return false;
