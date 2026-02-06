@@ -1,15 +1,15 @@
     package org.example.dao;
-    
+
     import org.example.model.Vocabulary;
     import org.example.utils.DatabaseConnection;
-    
+
     import java.sql.Connection;
     import java.sql.PreparedStatement;
     import java.sql.ResultSet;
     import java.sql.SQLException;
     import java.util.ArrayList;
     import java.util.List;
-    
+
     public class VocabularyDAO {
         private Vocabulary getVocabularyByRs(ResultSet rs) throws SQLException {
             Vocabulary vocabulary = new Vocabulary();
@@ -23,42 +23,24 @@
             vocabulary.setExampleMeaning(rs.getString("example_meaning"));
             return vocabulary;
         }
-    
-    
-        public List<Vocabulary> getVocabularyByTag(String tag) {
-            List<Vocabulary> VocabListByTag = new ArrayList<>();
-            String sql = "select * from vocabularies where tag = ?";
-            try {
-                Connection con = DatabaseConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql);
-                ps.setString(1, tag);
-                ResultSet rs = ps.executeQuery();
-    
-                while (rs.next()) {
-                    VocabListByTag.add(getVocabularyByRs(rs));
-                }
-    
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return VocabListByTag;
-        }
-    
-    
+
+
+
+
         public List<Vocabulary> getNewVocabularies(int userId, String tag) {
             List<Vocabulary> list = new ArrayList<>();
             String sql = "select * from vocabularies v" +
                     " where v.id not in (select s.vocab_id from SaveUser s where s.user_id = ?) " +
                     "and v.tag = ? " +
                     "order by rand() LIMIT ?";
-    
+
             try (Connection con = DatabaseConnection.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
-    
+
                 ps.setInt(1, userId);
                 ps.setString(2, tag);
                 ps.setInt(3, 10);
-    
+
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         list.add(getVocabularyByRs(rs));
@@ -69,13 +51,13 @@
             }
             return list;
         }
-    
-    
+
+
         public List<String> getAllTags() {
             List<String> tags = new ArrayList<>();
-    
+
             String sql = "select distinct tag from vocabularies where tag is not null and tag != ''";
-    
+
             try (Connection con = DatabaseConnection.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql);
                  ResultSet rs = ps.executeQuery()) {
@@ -87,5 +69,68 @@
                 e.printStackTrace();
             }
             return tags;
+        }
+
+
+
+
+
+        public List<Vocabulary> getAllVocabularyReview(int userId,String tag){
+            List<Vocabulary> list = new ArrayList<>();
+            String sql = "SELECT v.*, s.status, s.count_correct " +
+                    "FROM vocabularies v " +
+                    "Join SaveUser s on v.id = s.vocab_id " + // SaveUser nối với vocabularies
+                    "where s.user_id = ? and v.tag = ?";
+            try (Connection con = DatabaseConnection.getConnection();
+                 PreparedStatement ps = con.prepareStatement(sql)) {
+
+                ps.setInt(1, userId);
+                ps.setString(2, tag);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        Vocabulary vocab = Vocabulary.builder()
+                                .id(rs.getInt("id"))
+                                .word(rs.getString("word"))
+                                .ipa(rs.getString("ipa"))
+                                .meaning(rs.getString("meaning"))
+                                .example(rs.getString("example"))
+                                .exampleMeaning(rs.getString("example_meaning"))
+                                .Audio(rs.getString("audio_url"))
+                                .Tag(rs.getString("tag"))
+                                .status(rs.getInt("status"))
+                                .countCorrect(rs.getInt("count_correct"))
+                                .build();
+
+                        list.add(vocab);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return list;
+        }
+
+
+        public List<Vocabulary> getAllVocabularyText(int userId,String tag){
+            List<Vocabulary> list = new ArrayList<>();
+            String sql = "select v.* from vocabularies v" +
+                    " join SaveUser s on v.id = s.vocab_id "+
+                    "where s.user_id = ? and s.status = 2 and v.tag = ?";
+            try (Connection con = DatabaseConnection.getConnection();
+                 PreparedStatement ps = con.prepareStatement(sql)) {
+
+                ps.setInt(1, userId);
+                ps.setString(2, tag);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        list.add(getVocabularyByRs(rs));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return list;
         }
     }

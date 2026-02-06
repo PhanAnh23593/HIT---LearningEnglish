@@ -26,6 +26,7 @@ import org.example.dao.UserDAO;
 import org.example.dao.VocabularyDAO;
 import org.example.model.User;
 import org.example.model.Vocabulary;
+import org.example.service.impl.DailyProgressServiceImpl;
 import org.example.service.impl.GoogleTTSServiceImpl;
 import org.example.utils.UserSession;
 
@@ -84,6 +85,7 @@ public class LearningController {
     private int indextoday = 0;
     private boolean checkshow= true;
     private MediaPlayer media;
+    private final DailyProgressServiceImpl checkLearningToDay = new DailyProgressServiceImpl();
 
 
     @FXML
@@ -95,10 +97,6 @@ public class LearningController {
 
         try {
             User currentUser = UserSession.currentUser;
-            if (currentUser == null) {
-                onBackToDashboard();
-                return;
-            }
             LocalDate today = LocalDate.now();
             if (currentUser.getLastLearningDate() != null && currentUser.getLastLearningDate().equals(today)) {
                 showAlertComplete(AppMessage.ALERT_COMPLETE3);
@@ -210,15 +208,15 @@ public class LearningController {
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Complete");
-                alert.setHeaderText("Bạn đã học hết 10 từ vựng.");
-                alert.setContentText("Bạn muốn LƯU KẾT QUẢ hay ÔN TẬP LẠI?");
+                alert.setHeaderText(AppMessage.ALERT_LEARNING_COMPLETE);
+                alert.setContentText(AppMessage.ALERT_LEARNING_QUESTION);
 
                 ButtonType btnSave = new ButtonType("Lưu & Hoàn thành", javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
                 ButtonType btnReview = new ButtonType("Chưa lưu (Học lại)", javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
                 alert.getButtonTypes().setAll(btnSave, btnReview);
                 alert.showAndWait().ifPresent(type -> {
                     if (type == btnSave) {
-                        if (UserSession.currentUser == null) return;
+                        checkLearningToDay.markLearningDone();
                         int userId = UserSession.currentUser.getId();
                         for (Vocabulary v : listvocabtoday) {
                             saveuserdao.SaveLearningUser(userId, v.getId());

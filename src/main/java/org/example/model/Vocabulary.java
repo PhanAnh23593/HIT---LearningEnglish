@@ -1,7 +1,7 @@
 package org.example.model;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
+        import lombok.experimental.FieldDefaults;
 
 @Data
 @NoArgsConstructor
@@ -17,4 +17,6 @@ public class Vocabulary {
     String exampleMeaning;
     String Audio;
     String Tag;
+    int status;
+    int countCorrect;
 }

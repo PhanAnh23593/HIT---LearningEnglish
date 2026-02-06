@@ -129,7 +129,7 @@
                             </effect>
                         </Button>
 
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#onReview" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Ôn Tập" textFill="#2c3e50" GridPane.columnIndex="1">
+                        <Button fx:id="btnReview" contentDisplay="TOP" mnemonicParsing="false" onAction="#onReview" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Ôn Tập" textFill="#2c3e50" GridPane.columnIndex="1">
                             <graphic>
                                 <Label text="🧠">
                                     <font>

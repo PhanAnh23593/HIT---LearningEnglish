@@ -1,0 +1,5 @@
+.button-review {
+    -fx-background-image: url("../images/button_review.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: contain;
+}

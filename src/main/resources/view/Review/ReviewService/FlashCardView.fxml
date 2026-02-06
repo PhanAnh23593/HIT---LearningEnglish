@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="30.0" style="-fx-padding: 20; -fx-background-color: #F3F4F6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Review.ReviewController">
+    <HBox alignment="CENTER_LEFT" prefWidth="800.0">
+        <Button style="-fx-background-color: transparent; -fx-font-size: 16px; -fx-text-fill: #6B7280; -fx-cursor: hand;" text="× Thoát" />
+    </HBox>
+
+    <Label text="Thẻ Flashcard" textFill="#4b5563">
+        <font><Font name="System Bold" size="18.0" /></font>
+    </Label>
+
+    <StackPane fx:id="cardContainer" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 8); -fx-cursor: hand;">
+        <Label fx:id="lblCardFront" text="Astronaut" textFill="#4f46e5">
+            <font><Font name="System Bold" size="48.0" /></font>
+        </Label>
+        <Label fx:id="lblCardBack" text="Phi hành gia" textFill="#374151" visible="false">
+            <font><Font size="36.0" /></font>
+        </Label>
+    </StackPane>
+
+    <Label text="(Chạm vào thẻ để lật)" textFill="#9ca3af" />
+
+    <HBox spacing="40.0">
+        <Button prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: #EF4444; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #EF4444; -fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;" text="Chưa thuộc" />
+        <Button prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #10B981; -fx-background-radius: 12; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;" text="Đã thuộc" />
+    </HBox>
+</VBox>
