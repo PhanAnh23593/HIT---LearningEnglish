@@ -19,4 +19,8 @@ public interface AppSuccsess {
 
     //LEARNING
     String COMPLETE_LEARNING = "Chúc mừng! Bạn đã hoàn thành bài học hôm nay.";
+
+
+    //REVIEW
+    String ALERT_REVIEW_FLASHCARD_COMPLETE = "Bạn đã ôn tập từ vựng thành công.";
 }

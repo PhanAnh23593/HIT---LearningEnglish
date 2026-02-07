@@ -53,7 +53,7 @@ public class ShowListReniewController {
 
     private void loadData() {
         User currentUser = UserSession.currentUser;
-            List<Vocabulary> vocabList = vocabDAO.getAllVocabularyReview(currentUser.getId(), currentUser.getMajor());
+            List<Vocabulary> vocabList = vocabDAO.getAllVocabularySavebyTag(currentUser.getId(), currentUser.getMajor());
             listShow = FXCollections.observableArrayList(vocabList);
             tableVocab.setItems(listShow);
     }

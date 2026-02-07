@@ -64,7 +64,16 @@ public class ReviewHomeController {
 
     @FXML
     void onFlashcardshow(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/ReviewService/FlashCardView.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lbprocess.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("FlashCardReview");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
