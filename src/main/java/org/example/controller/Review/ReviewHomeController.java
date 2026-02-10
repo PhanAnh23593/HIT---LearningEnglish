@@ -63,7 +63,7 @@ public class ReviewHomeController {
     }
 
     @FXML
-    void onFlashcardshow(ActionEvent event) {
+    void onFlashcardshow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/ReviewService/FlashCardView.fxml"));
             Parent root = loader.load();
@@ -77,13 +77,22 @@ public class ReviewHomeController {
     }
 
     @FXML
-    void onSentence(ActionEvent event) {
+    void onSentence() {
 
     }
 
     @FXML
-    void onWordShow(ActionEvent event) {
-
+    void onWordShow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/ReviewService/QuizWordView.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lbprocess.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("FlashCardReview");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

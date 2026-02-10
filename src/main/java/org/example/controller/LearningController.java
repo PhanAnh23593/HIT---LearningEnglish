@@ -85,7 +85,7 @@ public class LearningController {
     private int indextoday = 0;
     private boolean checkshow= true;
     private MediaPlayer media;
-    private final DailyProgressServiceImpl checkLearningToDay = new DailyProgressServiceImpl();
+    private final DailyProgressServiceImpl checkLearning = new DailyProgressServiceImpl();
 
 
     @FXML
@@ -97,6 +97,10 @@ public class LearningController {
 
         try {
             User currentUser = UserSession.currentUser;
+            if (currentUser == null) {
+                onBackToDashboard();
+                return;
+            }
             LocalDate today = LocalDate.now();
             if (currentUser.getLastLearningDate() != null && currentUser.getLastLearningDate().equals(today)) {
                 showAlertComplete(AppMessage.ALERT_COMPLETE3);
@@ -216,7 +220,8 @@ public class LearningController {
                 alert.getButtonTypes().setAll(btnSave, btnReview);
                 alert.showAndWait().ifPresent(type -> {
                     if (type == btnSave) {
-                        checkLearningToDay.markLearningDone();
+                        checkLearning.markLearningDone();
+                        if (UserSession.currentUser == null) return;
                         int userId = UserSession.currentUser.getId();
                         for (Vocabulary v : listvocabtoday) {
                             saveuserdao.SaveLearningUser(userId, v.getId());

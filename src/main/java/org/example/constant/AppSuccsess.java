@@ -23,4 +23,7 @@ public interface AppSuccsess {
 
     //REVIEW
     String ALERT_REVIEW_FLASHCARD_COMPLETE = "Bạn đã ôn tập từ vựng thành công.";
+
+    String REVIEW_QUIZ_COMPLETE = "Bạn đã ôn tập thành công bài tập dạng Quiz ";
+    String REVIEW_GOOD = "Tuyệt vời !";
 }
