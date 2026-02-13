@@ -59,6 +59,16 @@ public class ReviewHomeController {
 
     @FXML
     void onAudioShow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/ReviewService/QuizAudioView.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lbprocess.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("ReViewHome");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

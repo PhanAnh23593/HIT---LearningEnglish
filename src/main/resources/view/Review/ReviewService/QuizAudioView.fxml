@@ -20,13 +20,17 @@
     </padding>
 
     <HBox alignment="CENTER" spacing="20.0">
-        <Button styleClass="close-button" text="✕" />
+      <Button mnemonicParsing="false" onAction="#onBack" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: transparent; -fx-font-weight: Bold; -fx-border-color: #b2bec3;" styleClass="back-button" text="← Quay lại" textFill="#5e6c84">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
 
         <StackPane fx:id="progressaudio" HBox.hgrow="ALWAYS">
-            <ProgressBar maxWidth="1.7976931348623157E308" progress="0.7" styleClass="progress-bar" />
+            <ProgressBar fx:id="lbprogress" maxWidth="1.7976931348623157E308" progress="0.7" styleClass="progress-bar" />
         </StackPane>
 
-        <Label fx:id="lbprogress" style="-fx-font-weight: bold; -fx-text-fill: #a29bfe;" text="7/10">
+        <Label fx:id="lbprogresstag" style="-fx-font-weight: bold; -fx-text-fill: #a29bfe;" text="7/10">
             <font>
                 <Font size="16.0" />
             </font>
@@ -53,22 +57,22 @@
             <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
         </rowConstraints>
 
-        <Button fx:id="btnA" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAnswerA" styleClass="answer-button" text="A. Kitchen" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Button fx:id="btnA" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnA" styleClass="answer-button" text="A. Kitchen" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <graphic>
                 <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="1" />
             </graphic></Button>
 
-        <Button fx:id="btnB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAnswerB" styleClass="answer-button" text="B. Chicken" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Button fx:id="btnB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnB" styleClass="answer-button" text="B. Chicken" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <graphic>
                 <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="2" />
             </graphic></Button>
 
-        <Button fx:id="btnC" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAnswerC" styleClass="answer-button" text="C. Children" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <Button fx:id="btnC" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnC" styleClass="answer-button" text="C. Children" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <graphic>
                 <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="3" />
             </graphic></Button>
 
-        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAnswerD" styleClass="answer-button" text="D. Kitten" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <Button fx:id="btnD" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnD" styleClass="answer-button" text="D. Kitten" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <graphic>
                 <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="4" />
             </graphic></Button>
