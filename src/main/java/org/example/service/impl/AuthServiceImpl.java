@@ -10,9 +10,6 @@ import org.mindrot.jbcrypt.BCrypt;
 public class AuthServiceImpl implements AuthService {
     private UserDAO userDAO = new UserDAO();
 
-
-
-
     @Override
     public boolean Register(User user) throws IllegalArgumentException {
 

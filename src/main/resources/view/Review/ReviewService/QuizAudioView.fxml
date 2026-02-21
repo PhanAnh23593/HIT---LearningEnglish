@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="800.0" spacing="40.0" styleClass="root" stylesheets="@../../../css/reviewaudido.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Review.AudioReviewController">
+
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+
+    <HBox alignment="CENTER" spacing="20.0">
+      <Button mnemonicParsing="false" onAction="#onBack" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: transparent; -fx-font-weight: Bold; -fx-border-color: #b2bec3;" styleClass="back-button" text="← Quay lại" textFill="#5e6c84">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+
+        <StackPane fx:id="progressaudio" HBox.hgrow="ALWAYS">
+            <ProgressBar fx:id="lbprogress" maxWidth="1.7976931348623157E308" progress="0.7" styleClass="progress-bar" />
+        </StackPane>
+
+        <Label fx:id="lbprogresstag" style="-fx-font-weight: bold; -fx-text-fill: #a29bfe;" text="7/10">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+    </HBox>
+
+    <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+        <Label styleClass="instruction-label" text="Nghe và chọn từ đúng" />
+
+        <Button fx:id="btnaudio" onAction="#playAudio" styleClass="audio-button">
+            <graphic>
+                <SVGPath content="M10 9V5L3 12H0V18H3L10 25V21L4.41 16.5H2V13.5H4.41L10 9ZM14 8.5V11.5C15.86 12.3 16.5 13.9 16.5 15C16.5 16.1 15.86 17.7 14 18.5V21.5C17.5 20.5 19.5 17.7 19.5 15C19.5 12.3 17.5 9.5 14 8.5ZM14 2V5C19.5 6.1 23.5 10.7 23.5 15C23.5 19.3 19.5 23.9 14 25V28C21.16 26.8 26.5 21 26.5 15C26.5 9 21.16 3.2 14 2Z" scaleX="2.0" scaleY="2.0" styleClass="audio-icon-shape" />
+            </graphic>
+        </Button>
+    </VBox>
+
+    <GridPane hgap="20.0" vgap="20.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+
+        <Button fx:id="btnA" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnA" styleClass="answer-button" text="A. Kitchen" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <graphic>
+                <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="1" />
+            </graphic></Button>
+
+        <Button fx:id="btnB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnB" styleClass="answer-button" text="B. Chicken" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <graphic>
+                <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="2" />
+            </graphic></Button>
+
+        <Button fx:id="btnC" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnC" styleClass="answer-button" text="C. Children" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <graphic>
+                <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="3" />
+            </graphic></Button>
+
+        <Button fx:id="btnD" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onbtnD" styleClass="answer-button" text="D. Kitten" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <graphic>
+                <Label style="-fx-background-color: #dfe6e9; -fx-padding: 5 10; -fx-background-radius: 5; -fx-font-weight: bold; -fx-text-fill: #636e72;" text="4" />
+            </graphic></Button>
+    </GridPane>
+</VBox>

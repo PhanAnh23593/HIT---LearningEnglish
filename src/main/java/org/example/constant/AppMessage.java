@@ -17,5 +17,15 @@ public interface AppMessage {
     String ALERT_NOT_COMPLETE4 = "Bắt đầu ngày mới bằng một chức năng mới ?";
     String ALERT_FIRSTLOGIN = "WELCOME Newerson,bắt đầu với 10 Vocabulary new.";
 
+    String ALERT_LEARNING_QUESTION = "Bạn muốn LƯU KẾT QUẢ hay ÔN TẬP LẠI?";
+    String ALERT_LEARNING_COMPLETE = "Bạn đã học hết 10 từ vựng.";
+
+    //DASHBOARD - REVIEW
+    String ALERT_REVIEW_NOTSTART = "Bạn hãy học từ vựng trước để sử dụng chức năng này";
+    String ALER_REVIEW_NOTDATA = "Chưa có từ vựng nào bạn đã được học";
+
+    //REVIEW - FLASHCARD
+
+
 
 }

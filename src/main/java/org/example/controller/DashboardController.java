@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,16 +14,23 @@ import javafx.stage.Stage;
 import org.example.constant.AppError;
 import org.example.constant.AppMessage;
 import org.example.dao.UserDAO;
+import org.example.dao.VocabularyDAO;
 import org.example.model.User;
+import org.example.model.Vocabulary;
 import org.example.utils.UserSession;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.example.utils.UserSession.currentUser;
 
 public class DashboardController {
+
+
+    @FXML
+    private Button btnReview;
 
     @FXML
     private ImageView imgAvatar;
@@ -38,7 +46,7 @@ public class DashboardController {
 
 
 
-    private final UserDAO userDAO = new UserDAO();
+    private final VocabularyDAO vocabDAO = new VocabularyDAO();
 
     @FXML
     public void initialize(){
@@ -97,9 +105,6 @@ public class DashboardController {
             e.printStackTrace();
         }
 
-
-
-
     }
 
 
@@ -154,7 +159,30 @@ public class DashboardController {
 
     @FXML
     void onReview() {
+        try {
+            User currentUser = UserSession.currentUser;
+            List<Vocabulary> list = vocabDAO.getAllVocabularyReview(currentUser.getId(),currentUser.getMajor());
 
+            if (list.size() == 0) {
+                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                alert.setTitle("Alert");
+                alert.setHeaderText(AppMessage.ALER_REVIEW_NOTDATA);
+                alert.setContentText(AppMessage.ALERT_REVIEW_NOTSTART);
+                alert.showAndWait();
+                return;
+            }
+
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/HomeReview/ReviewHome.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("ReviewVocabulary");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

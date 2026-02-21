@@ -1,15 +1,13 @@
-package org.example.controller;
+package org.example.controller.Review;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -18,11 +16,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.constant.AppError;
-import org.example.constant.AppMessage;
 import org.example.constant.AppSuccsess;
-import org.example.dao.SaveUserDAO;
-import org.example.dao.UserDAO;
 import org.example.dao.VocabularyDAO;
 import org.example.model.User;
 import org.example.model.Vocabulary;
@@ -31,11 +25,9 @@ import org.example.service.impl.GoogleTTSServiceImpl;
 import org.example.utils.UserSession;
 
 import java.io.IOException;
-import java.security.spec.ECField;
-import java.time.LocalDate;
 import java.util.List;
 
-public class LearningController {
+public class FlashCardReviewController {
 
     @FXML
     private VBox backCard;
@@ -78,14 +70,12 @@ public class LearningController {
 
 
     private final VocabularyDAO vocabdao = new VocabularyDAO();
-    private final SaveUserDAO saveuserdao = new SaveUserDAO();
     private final GoogleTTSServiceImpl ggttservice = new GoogleTTSServiceImpl();
-    private final UserDAO userdao = new UserDAO();
-    private List<Vocabulary> listvocabtoday ;
-    private int indextoday = 0;
+    private List<Vocabulary> listvocabreview ;
+    private int indexreview = 0;
     private boolean checkshow= true;
     private MediaPlayer media;
-    private final DailyProgressServiceImpl checkLearning = new DailyProgressServiceImpl();
+    private final DailyProgressServiceImpl checkReviewToDay = new DailyProgressServiceImpl();
 
 
     @FXML
@@ -97,26 +87,11 @@ public class LearningController {
 
         try {
             User currentUser = UserSession.currentUser;
-            if (currentUser == null) {
-                onBackToDashboard();
-                return;
-            }
-            LocalDate today = LocalDate.now();
-            if (currentUser.getLastLearningDate() != null && currentUser.getLastLearningDate().equals(today)) {
-                showAlertComplete(AppMessage.ALERT_COMPLETE3);
-                onBackToDashboard();
-                return;
-            }
             int userId = currentUser.getId();
             String major = currentUser.getMajor();
-            this.listvocabtoday = vocabdao.getNewVocabularies(userId, major);
-            if (this.listvocabtoday == null || this.listvocabtoday.isEmpty()) {
-                onBackToDashboard();
-                return;
-            }
-            indextoday = 0;
-            Showcard(indextoday);
-
+            listvocabreview = vocabdao.getAllVocabularyReview(userId, major);
+            indexreview = 0;
+            Showcard(indexreview);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,17 +99,13 @@ public class LearningController {
 
     private void Showcard(int index) {
         try {
-            if (listvocabtoday == null || index < 0 || index >= listvocabtoday.size()) return;
-
-            Vocabulary vocabindex = listvocabtoday.get(index);
-
+            Vocabulary vocabindex = listvocabreview.get(index);
             lbWord.setText(vocabindex.getWord());
             lbIpa.setText(vocabindex.getIpa());
             lbMeaning.setText(vocabindex.getMeaning());
             lbExample.setText(vocabindex.getExample());
             lbExampleMeaning.setText(vocabindex.getExampleMeaning());
             resetCardToFront();
-
             btnpass.setDisable(index == 0);
             btnnext.setDisable(false);
             btnAudio.setDisable(false);
@@ -155,22 +126,25 @@ public class LearningController {
 
 
     @FXML
-    void onBackToDashboard() {
+    void onBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard/DashBoard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/HomeReview/ReviewHome.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) backCard.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("DASHBOARD");
+            stage.setTitle("HomeReview");
             stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
     }
 
 
     @FXML
-    void onFlipCard() {
+    void onFlip() {
         Duration duration =Duration.millis(300);
 
         VBox displaycard = checkshow ? frontCard : backCard;
@@ -201,40 +175,26 @@ public class LearningController {
     }
 
     @FXML
-    void onNextCard() {
-        if (listvocabtoday == null || listvocabtoday.isEmpty()) return;
-
+    void onNext() {
         try {
-            if (indextoday < listvocabtoday.size() - 1) {
-                indextoday++;
-                Showcard(indextoday);
+            if (indexreview < listvocabreview.size() - 1) {
+                indexreview++;
+                Showcard(indexreview);
             } else {
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Complete");
-                alert.setHeaderText(AppMessage.ALERT_LEARNING_COMPLETE);
-                alert.setContentText(AppMessage.ALERT_LEARNING_QUESTION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("complete");
+                alert.setHeaderText(null);
+                alert.setContentText(AppSuccsess.ALERT_REVIEW_FLASHCARD_COMPLETE);
+                alert.showAndWait();
+                checkReviewToDay.markFlashcardDone();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/HomeReview/ReviewHome.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) backCard.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("HomeReview");
+                stage.centerOnScreen();
 
-                ButtonType btnSave = new ButtonType("Lưu & Hoàn thành", javafx.scene.control.ButtonBar.ButtonData.OK_DONE);
-                ButtonType btnReview = new ButtonType("Chưa lưu (Học lại)", javafx.scene.control.ButtonBar.ButtonData.CANCEL_CLOSE);
-                alert.getButtonTypes().setAll(btnSave, btnReview);
-                alert.showAndWait().ifPresent(type -> {
-                    if (type == btnSave) {
-                        checkLearning.markLearningDone();
-                        if (UserSession.currentUser == null) return;
-                        int userId = UserSession.currentUser.getId();
-                        for (Vocabulary v : listvocabtoday) {
-                            saveuserdao.SaveLearningUser(userId, v.getId());
-                        }
-                        userdao.updateLastLearningDate(userId);
-                        UserSession.currentUser.setLastLearningDate(LocalDate.now());
-                        showAlertComplete(AppSuccsess.COMPLETE_LEARNING);
-                        onBackToDashboard();
-                    } else {
-                        indextoday = 0;
-                        Showcard(indextoday);
-                    }
-                });
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -242,18 +202,18 @@ public class LearningController {
     }
 
     @FXML
-    void onPassCard() {
-        if(indextoday > 0){
-            indextoday--;
-            Showcard(indextoday);
+    void onPass() {
+        if(indexreview > 0){
+            indexreview--;
+            Showcard(indexreview);
         }
     }
 
     @FXML
     void playAudio() {
-        if (listvocabtoday == null || listvocabtoday.isEmpty()) return;
+        if (listvocabreview == null || listvocabreview.isEmpty()) return;
 
-        Vocabulary currentVocab = listvocabtoday.get(indextoday);
+        Vocabulary currentVocab = listvocabreview.get(indexreview);
         String audioUrl = currentVocab.getAudio();
         if (audioUrl == null || audioUrl.isEmpty()) {
             audioUrl = ggttservice.getAudioPath(currentVocab.getWord());
@@ -273,16 +233,5 @@ public class LearningController {
         }
     }
 
-    private void showAlertComplete(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Alert");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-        btnAudio.setDisable(true);
-        btnFlip.setDisable(true);
-        btnnext.setDisable(true);
-        btnpass.setDisable(true);
-    }
 
 }

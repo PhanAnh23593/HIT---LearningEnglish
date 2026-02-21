@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20.0" style="-fx-padding: 30; -fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Review.ShowListReniewController">
+    <HBox alignment="CENTER_LEFT" spacing="15.0">
+        <Button onAction="#onExits" style="-fx-background-color: #F3F4F6; -fx-background-radius: 8; -fx-cursor: hand;" text="← Quay lại" textFill="#4b5563" />
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="479.0" text="Danh sách từ vựng" textFill="#1f2937">
+            <font><Font name="System Bold" size="24.0" /></font>
+        </Label>
+    </HBox>
+
+    <HBox spacing="10.0">
+        <TextField fx:id="txtKey" promptText="Tìm kiếm từ..." style="-fx-background-radius: 8; -fx-padding: 10; -fx-border-color: #E5E7EB; -fx-border-radius: 8;" HBox.hgrow="ALWAYS" />
+        <Button fx:id="onFindKey" style="-fx-background-color: #4f46e5; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20; -fx-font-weight: bold; -fx-cursor: hand;" text="Tìm kiếm" />
+    </HBox>
+
+    <TableView fx:id="tableVocab" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 8;" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="tbStt" prefWidth="60.0" style="-fx-alignment: CENTER;" text="STT" />
+
+            <TableColumn fx:id="tbWord" prefWidth="200.0" style="-fx-font-size: 14px;" text="Từ vựng (English)" />
+            <TableColumn fx:id="tbMeaning" prefWidth="300.0" style="-fx-font-size: 14px;" text="Nghĩa (Vietnamese)" />
+            <TableColumn fx:id="tbCountCorrect" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Trạng thái" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</VBox>
