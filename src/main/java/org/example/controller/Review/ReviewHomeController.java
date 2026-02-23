@@ -88,6 +88,16 @@ public class ReviewHomeController {
 
     @FXML
     void onSentence() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/ReviewService/QuizSentenceView.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lbprocess.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("ReViewHome");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
