@@ -1,10 +1,10 @@
-package org.example.controller;
+package org.example.controller.Dashboard;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,7 +13,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.example.constant.AppError;
 import org.example.constant.AppMessage;
-import org.example.dao.UserDAO;
 import org.example.dao.VocabularyDAO;
 import org.example.model.User;
 import org.example.model.Vocabulary;
@@ -27,7 +26,6 @@ import java.util.List;
 import static org.example.utils.UserSession.currentUser;
 
 public class DashboardController {
-
 
     @FXML
     private Button btnReview;
@@ -44,7 +42,8 @@ public class DashboardController {
     @FXML
     private Label lblUsername;
 
-
+    @FXML
+    private Button btnTest;
 
     private final VocabularyDAO vocabDAO = new VocabularyDAO();
 
@@ -71,8 +70,6 @@ public class DashboardController {
                     }
                 }
             }
-
-
 
             if (imageToLoad == null) {
                 imageToLoad = new Image(getClass().getResourceAsStream("/images/default.png"));
@@ -101,12 +98,23 @@ public class DashboardController {
 
 
 
+
+            int masteredCount = vocabDAO.countTestVocabularies(currentUser.getId(), currentUser.getMajor());
+
+            if (masteredCount < 50) {
+                btnTest.setDisable(true);
+                btnTest.setText("Kiểm tra (" + masteredCount + "/50)");
+                btnTest.setStyle("-fx-background-color: #bdc3c7; -fx-text-fill: #7f8c8d;");
+            } else {
+                btnTest.setDisable(false);
+                btnTest.setText("Kiểm tra");
+                btnTest.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;");
+            }
+
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
-
 
     @FXML
     void onEditProfile() {
@@ -120,7 +128,7 @@ public class DashboardController {
             LocalDate lastDate = currentUser.getLastLearningDate();
 
             if (lastDate != null && lastDate.equals(today)) {
-                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Alert");
                 alert.setHeaderText(AppMessage.ALERT_COMPLETE1);
                 alert.setContentText(AppMessage.ALERT_COMPLETE2);
@@ -129,6 +137,15 @@ public class DashboardController {
             }
 
 
+            List<Vocabulary> newWords = vocabDAO.getNewVocabularies(currentUser.getId(), currentUser.getMajor());
+            if (newWords == null || newWords.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Không tìm thấy từ vựng mới nào cho chuyên ngành này!");
+                alert.showAndWait();
+                return;
+            }
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Learning/LearningVocab.fxml"));
             Parent root = loader.load();
@@ -164,15 +181,13 @@ public class DashboardController {
             List<Vocabulary> list = vocabDAO.getAllVocabularyReview(currentUser.getId(),currentUser.getMajor());
 
             if (list.size() == 0) {
-                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Alert");
                 alert.setHeaderText(AppMessage.ALER_REVIEW_NOTDATA);
                 alert.setContentText(AppMessage.ALERT_REVIEW_NOTSTART);
                 alert.showAndWait();
                 return;
             }
-
-
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/HomeReview/ReviewHome.fxml"));
             Parent root = loader.load();
@@ -187,12 +202,24 @@ public class DashboardController {
 
     @FXML
     void onSpeaking() {
-
     }
 
     @FXML
-    void onText() {
-
+    void onTest() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Test/Test.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Test");
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
+
+
 
 }

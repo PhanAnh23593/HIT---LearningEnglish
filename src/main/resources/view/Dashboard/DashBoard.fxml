@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="950.0" stylesheets="@../../css/dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="950.0" stylesheets="@../../css/dashboard.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Dashboard.DashboardController">
 
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="240.0" spacing="20.0" styleClass="sidebar" BorderPane.alignment="CENTER">
@@ -145,7 +145,7 @@
                             </effect>
                         </Button>
 
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#onText" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Kiểm tra" textFill="#2c3e50" GridPane.rowIndex="1">
+                        <Button fx:id="btnTest" contentDisplay="TOP" mnemonicParsing="false" onAction="#onTest" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Kiểm tra" textFill="#2c3e50" GridPane.rowIndex="1">
                             <graphic>
                                 <Label text="📖">
                                     <font>

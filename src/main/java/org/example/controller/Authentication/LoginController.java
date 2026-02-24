@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Authentication;
 
 import javafx.animation.PauseTransition; // Import để làm trễ chuyển trang
 import javafx.concurrent.Task;
