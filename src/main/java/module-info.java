@@ -12,9 +12,15 @@ module org.example {
 
     opens org.example.model to javafx.base;
     opens org.example to javafx.fxml;
-    opens org.example.controller to javafx.fxml;
     opens org.example.controller.Review to javafx.fxml;
 
     exports org.example;
-    exports org.example.controller;
+    exports org.example.controller.Learning;
+    opens org.example.controller.Learning to javafx.fxml;
+    exports org.example.controller.Dashboard;
+    opens org.example.controller.Dashboard to javafx.fxml;
+    exports org.example.controller.Authentication;
+    opens org.example.controller.Authentication to javafx.fxml;
+    exports org.example.controller.Test;
+    opens org.example.controller.Test to javafx.fxml;
 }

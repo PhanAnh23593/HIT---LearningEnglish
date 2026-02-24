@@ -147,11 +147,12 @@
         }
 
 
-        public List<Vocabulary> getAllVocabularyText(int userId, String tag) {
+        public List<Vocabulary> getAllVocabularyTest(int userId, String tag) {
             List<Vocabulary> list = new ArrayList<>();
             String sql = "select v.* from vocabularies v" +
                     " join SaveUser s on v.id = s.vocab_id " +
-                    "where s.user_id = ? and s.status = 2 and v.tag = ?";
+                    "where s.user_id = ? and s.status = 2 and v.tag = ? " +
+                    "ORDER BY rand() LIMIT 20";
             try (Connection con = DatabaseConnection.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -168,4 +169,29 @@
             }
             return list;
         }
+
+        public int countTestVocabularies(int userId, String tag) {
+            int count = 0;
+            String sql = "SELECT COUNT(*) FROM SaveUser s " +
+                    "JOIN vocabularies v ON s.vocab_id = v.id " +
+                    "WHERE s.user_id = ? AND s.status = 2 AND v.tag = ?";
+
+            try (Connection con = DatabaseConnection.getConnection();
+                 PreparedStatement ps = con.prepareStatement(sql)) {
+
+                ps.setInt(1, userId);
+                ps.setString(2, tag);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        count = rs.getInt(1);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return count;
+        }
+
+
     }

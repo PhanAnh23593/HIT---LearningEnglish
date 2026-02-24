@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #4facfe, #00f2fe);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.IntroduceController">
+<StackPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #4facfe, #00f2fe);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Dashboard.IntroduceController">
     <children>
 
         <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="420.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20;">

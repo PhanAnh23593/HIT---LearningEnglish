@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Authentication;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;

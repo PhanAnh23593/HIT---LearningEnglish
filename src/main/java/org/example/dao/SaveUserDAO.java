@@ -76,6 +76,18 @@ public class SaveUserDAO {
     }
 
 
+    public void resetVocabulary(int userId, int vocabId) {
+        String sql = "UPDATE SaveUser SET status = 1, count_correct = 0 WHERE user_id = ? AND vocab_id = ?";
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, vocabId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
