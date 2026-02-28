@@ -102,7 +102,7 @@ public class IntroduceController {
             switchDashBoard(selectedMajor);
 
         } else {
-            showAlert("ERROR", "Đang bảo trì....!");
+            showAlert("ERROR", "");
         }
     }
 
@@ -119,7 +119,6 @@ public class IntroduceController {
 
         }catch(Exception e){
             e.printStackTrace();
-            showAlert("ERROR","Dashboard đang bảo trì...");
         }
     }
 

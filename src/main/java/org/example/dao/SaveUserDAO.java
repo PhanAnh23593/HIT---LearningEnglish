@@ -46,17 +46,14 @@ public class SaveUserDAO {
             e.printStackTrace();
             return false;
         }
-
     }
-
-
 
     public void updateProgress(int userId, int vocabId, boolean correct) {
         String sql;
         if (correct) {
             sql = "UPDATE SaveUser " +
                     "SET count_correct = count_correct + 1, " +
-                    "    status = CASE WHEN count_correct + 1 >= 3 THEN 2 ELSE status END " +
+                    "    status = CASE WHEN count_correct  >= 3 THEN 2 ELSE status END " +
                     "WHERE user_id = ? AND vocab_id = ?";
         } else {
             sql = "UPDATE SaveUser SET count_correct = 0 WHERE user_id = ? AND vocab_id = ?";
@@ -88,6 +85,22 @@ public class SaveUserDAO {
         }
     }
 
+
+
+    public void updateVocabularyStatus(int userId, int vocabId, int status) {
+        String sql = "UPDATE SaveUser SET status = ? WHERE user_id = ? AND vocab_id = ?";
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, status);
+            ps.setInt(2, userId);
+            ps.setInt(3, vocabId);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

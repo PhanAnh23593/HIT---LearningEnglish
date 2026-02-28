@@ -37,7 +37,7 @@
 
                 ps.setInt(1, userId);
                 ps.setString(2, tag);
-                ps.setInt(3, 10);
+                ps.setInt(3, 20);
 
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
@@ -175,7 +175,6 @@
             String sql = "SELECT COUNT(*) FROM SaveUser s " +
                     "JOIN vocabularies v ON s.vocab_id = v.id " +
                     "WHERE s.user_id = ? AND s.status = 2 AND v.tag = ?";
-
             try (Connection con = DatabaseConnection.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -193,5 +192,29 @@
             return count;
         }
 
+
+
+        public int countMemoryVocabularies(int userId, String tag) {
+            int count = 0;
+            String sql = "SELECT COUNT(*) FROM SaveUser s " +
+                    "JOIN vocabularies v ON s.vocab_id = v.id " +
+                    "WHERE s.user_id = ? AND s.status = 3 AND v.tag = ?";
+
+            try (Connection con = DatabaseConnection.getConnection();
+                 PreparedStatement ps = con.prepareStatement(sql)) {
+
+                ps.setInt(1, userId);
+                ps.setString(2, tag);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        count = rs.getInt(1);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return count;
+        }
 
     }

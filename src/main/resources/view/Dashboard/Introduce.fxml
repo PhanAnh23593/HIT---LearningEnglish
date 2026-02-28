@@ -53,15 +53,13 @@
                 <StackPane>
                     <children>
                         <Circle fill="WHITE" radius="65.0" stroke="#4facfe" strokeType="INSIDE" strokeWidth="3.0" />
-                        <ImageView fx:id="Avatar" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="Avatar" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="false">
                             <clip>
                                 <Circle centerX="60" centerY="60" radius="60" />
                             </clip>
-
                             <image>
                                 <Image url="@../../images/first_avatar.png" />
                             </image>
-                            
                         </ImageView>
                         <Button onAction="#ChooseAvata" style="-fx-background-color: #f1f2f6; -fx-background-radius: 50; -fx-cursor: hand;" text="📷" StackPane.alignment="BOTTOM_RIGHT">
                             <StackPane.margin>

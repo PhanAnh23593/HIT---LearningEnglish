@@ -18,27 +18,27 @@
     <left>
         <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="240.0" spacing="20.0" styleClass="sidebar" BorderPane.alignment="CENTER">
             <children>
-            <VBox prefHeight="131.0" prefWidth="240.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="240.0">
-                     <children>
-                            <ImageView fitHeight="80.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@../../images/logo.png" />
-                                </image>
-                                <VBox.margin>
-                                    <Insets top="30.0" />
-                                </VBox.margin>
-                            </ImageView>
-                        <Label styleClass="profile-name" text="HIT_ENGLISH" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
+                <VBox prefHeight="131.0" prefWidth="240.0">
+                    <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="240.0">
+                            <children>
+                                <ImageView fitHeight="80.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../images/logo.png" />
+                                    </image>
+                                    <VBox.margin>
+                                        <Insets top="30.0" />
+                                    </VBox.margin>
+                                </ImageView>
+                                <Label styleClass="profile-name" text="HIT_ENGLISH" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
 
                 <VBox alignment="CENTER" spacing="8.0">
                     <children>
-                        <ImageView fx:id="imgAvatar" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imgAvatar" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="false">
                             <image>
                                 <Image url="@../../images/first_avatar.png" />
                             </image>
@@ -57,18 +57,23 @@
 
                 <VBox spacing="15.0" VBox.vgrow="ALWAYS">
                     <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-      
-                              <Button mnemonicParsing="false" onAction="#onLogout" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #2C3E50;" styleClass="menu-button, logout-button" text="  🚪  Đăng xuất">
-                                  <VBox.margin>
-                                      <Insets top="20.0" />
-                                  </VBox.margin>
-                              </Button>
-                              <Button mnemonicParsing="false" onAction="#onEditProfile" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #f4F6F8;" styleClass="menu-button" text="👤  Hồ sơ cá nhân">
-                        </Button>
-                     </children>
-                  </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                            <children>
+
+                                <Button mnemonicParsing="false" onAction="#onEditProfile" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #f4F6F8;" styleClass="menu-button" text="👤  Hồ sơ cá nhân">
+                                </Button>
+
+                                <Button fx:id="btnAdmin" managed="false" mnemonicParsing="false" onAction="#onOpenUserList" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-background-radius: 8;" styleClass="menu-button" text="⚙️ Quản lý User" visible="false">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Button>
+
+                                <Button mnemonicParsing="false" onAction="#onLogout" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #2C3E50;" styleClass="menu-button, logout-button" text="  🚪  Đăng xuất">
+                                </Button>
+
+                            </children>
+                        </VBox>
                     </children>
                     <padding>
                         <Insets top="40.0" />
@@ -89,14 +94,14 @@
             <children>
                 <VBox spacing="5.0">
                     <children>
-                        <Label text="Chào mừng bạn vào học." textFill="#95a5a6">
+                        <Label fx:id="lbAlert" prefHeight="27.0" prefWidth="626.0" text="Chào mừng bạn vào học." textFill="#1ff4ff">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Label>
                         <Label fx:id="lbmessage" prefHeight="40.0" prefWidth="629.0" text="Bắt đầu ngày mới bằng?" textFill="#2c3e50">
                             <font>
-                                <Font name="System Bold" size="28.0" />
+                                <Font name="System Bold" size="16.0" />
                             </font>
                         </Label>
                     </children>

@@ -7,6 +7,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -47,17 +49,16 @@ public class UserDAO {
 
         String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 
-        String sql = "INSERT INTO users (username, email, password, full_name, role, status) VALUES (?, ?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO users (username, email, password, full_name, phone_number, role, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, hashedPassword);
             pstmt.setString(4, user.getFullName());
-            pstmt.setString(5, "USER");
-            pstmt.setInt(6, 1);
+            pstmt.setString(5, user.getPhoneNumber());
+            pstmt.setString(6, "USER");
+            pstmt.setInt(7, 1);
 
             int rowAffected = pstmt.executeUpdate();
             return rowAffected > 0;
@@ -118,14 +119,13 @@ public class UserDAO {
         return null;
     }
 
-    public boolean changePassword(int userId, String newPassword) {
+    public boolean changePassword(int userId, String newHashedPassword) {
         String sql = "UPDATE users SET password = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, newPassword);
+            pstmt.setString(1, newHashedPassword);
             pstmt.setInt(2, userId);
-            int rowsAffected = pstmt.executeUpdate();
-            return rowsAffected > 0;
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -187,5 +187,55 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    public boolean updateUserProfile(User user) {
+        String sql = "UPDATE users SET full_name = ?, phone_number = ?, email = ?, birthday = ?, avatar = ? WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, user.getFullName());
+            pstmt.setString(2, user.getPhoneNumber());
+            pstmt.setString(3, user.getEmail());
+
+            if (user.getBirthday() != null) {
+                pstmt.setDate(4, Date.valueOf(user.getBirthday()));
+            } else {
+                pstmt.setNull(4, java.sql.Types.DATE);
+            }
+
+            pstmt.setString(5, user.getAvatar());
+            pstmt.setInt(6, user.getId());
+
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        String sql = "SELECT id, username, email, role FROM users";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userList;
     }
 }
