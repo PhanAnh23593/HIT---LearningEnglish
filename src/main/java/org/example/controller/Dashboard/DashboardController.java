@@ -103,7 +103,7 @@ public class DashboardController {
 
             int masteredCount = vocabDAO.countTestVocabularies(currentUser.getId(), currentUser.getMajor());
 
-            if (masteredCount < 20) {
+            if (masteredCount < 50) {
                 btnTest.setDisable(true);
                 btnTest.setText("Kiểm tra (" + masteredCount + "/50)");
                 btnTest.setStyle("-fx-background-color: red; -fx-text-fill: #7f8c8d;");
