@@ -1,7 +1,6 @@
 package org.example.controller.Review;
 
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,17 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.constant.AppMessage;
 import org.example.constant.AppSuccsess;
 import org.example.dao.SaveUserDAO;
 import org.example.dao.VocabularyDAO;
-import org.example.model.SaveUser;
 import org.example.model.User;
 import org.example.model.Vocabulary;
 import org.example.service.impl.DailyProgressServiceImpl;
 import org.example.utils.UserSession;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -77,18 +72,25 @@ public class WordReviewController {
 
 
             if (index >= reviewList.size()) {
-                javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-                alert.setTitle("Alert");
-                alert.setHeaderText(AppSuccsess.REVIEW_GOOD);
-                alert.setContentText(AppSuccsess.REVIEW_QUIZ_COMPLETE);
-                alert.showAndWait();
-                CheckQuiz.markQuizDone();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/HomeReview/ReviewHome.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) btnA.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setTitle("HomeReview");
-                stage.centerOnScreen();
+                javafx.application.Platform.runLater(() -> {
+                    try {
+                        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+                        alert.setTitle("Alert");
+                        alert.setHeaderText(AppSuccsess.REVIEW_GOOD);
+                        alert.setContentText(AppSuccsess.REVIEW_QUIZ_COMPLETE);
+                        alert.showAndWait();
+                        CheckQuiz.markQuizDone();
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Review/HomeReview/ReviewHome.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = (Stage) btnA.getScene().getWindow();
+                        stage.setScene(new Scene(root));
+                        stage.setTitle("HomeReview");
+                        stage.centerOnScreen();
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                        }
+                });
                 return;
             }
 
@@ -112,10 +114,14 @@ public class WordReviewController {
             }
             Collections.shuffle(btnanswer);
 
-            btnA.setText(btnanswer.get(0).getMeaning());
-            btnB.setText(btnanswer.get(1).getMeaning());
-            btnC.setText(btnanswer.get(2).getMeaning());
-            btnD.setText(btnanswer.get(3).getMeaning());
+            btnA.setVisible(false);
+            btnB.setVisible(false);
+            btnC.setVisible(false);
+            btnD.setVisible(false);
+            if (btnanswer.size() > 0) { btnA.setText(btnanswer.get(0).getMeaning()); btnA.setVisible(true); }
+            if (btnanswer.size() > 1) { btnB.setText(btnanswer.get(1).getMeaning()); btnB.setVisible(true); }
+            if (btnanswer.size() > 2) { btnC.setText(btnanswer.get(2).getMeaning()); btnC.setVisible(true); }
+            if (btnanswer.size() > 3) { btnD.setText(btnanswer.get(3).getMeaning()); btnD.setVisible(true); }
         }
         catch(Exception e){
             e.printStackTrace();
@@ -137,6 +143,7 @@ public class WordReviewController {
 
     public void CheckAnswer(Button btn){
         try {
+            if (indexreview >= reviewList.size()) return;
             BlockButton(true);
             String answer = btn.getText();
             if (answer.equals(reviewList.get(indexreview).getMeaning())) {

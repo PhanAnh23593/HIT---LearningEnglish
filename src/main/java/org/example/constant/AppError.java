@@ -48,6 +48,8 @@ public interface AppError {
 
     //LEARNING
     String LOAD_IDUSER_FAIL = "0026 ERROR: Load ID người dùng thất bại ";
-    String LOAD_VOCABUSER_FAIL = "0027 ERROR: Load từ vựng của người dùng thất bại ";
-    String INDEX_INVALLID = "0028 ERROR: Index không hợp lệ ";
+
+
+    //CHANGEPASSWORD
+    String CHECK_PASSWORD_FAIL = "0027 ERROR: Mật khẩu hiện tại không đúng!";
 }

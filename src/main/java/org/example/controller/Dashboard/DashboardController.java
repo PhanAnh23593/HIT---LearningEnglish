@@ -26,9 +26,8 @@ import java.util.List;
 import static org.example.utils.UserSession.currentUser;
 
 public class DashboardController {
-
     @FXML
-    private Button btnReview;
+    private Label  lbAlert;
 
     @FXML
     private ImageView imgAvatar;
@@ -44,6 +43,9 @@ public class DashboardController {
 
     @FXML
     private Button btnTest;
+
+    @FXML
+    private Button btnAdmin;
 
     private final VocabularyDAO vocabDAO = new VocabularyDAO();
 
@@ -104,7 +106,7 @@ public class DashboardController {
             if (masteredCount < 50) {
                 btnTest.setDisable(true);
                 btnTest.setText("Kiểm tra (" + masteredCount + "/50)");
-                btnTest.setStyle("-fx-background-color: #bdc3c7; -fx-text-fill: #7f8c8d;");
+                btnTest.setStyle("-fx-background-color: red; -fx-text-fill: #7f8c8d;");
             } else {
                 btnTest.setDisable(false);
                 btnTest.setText("Kiểm tra");
@@ -114,10 +116,31 @@ public class DashboardController {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        if (currentUser != null && "admin".equalsIgnoreCase(currentUser.getRole())) {
+            btnAdmin.setVisible(true);
+            btnAdmin.setManaged(true);
+        }
+
+
+
+        if(vocabDAO.countMemoryVocabularies(currentUser.getId(), currentUser.getMajor())>=1){
+            lbAlert.setText("Congratuations,Bạn đã học được : "+ vocabDAO.countMemoryVocabularies(currentUser.getId(), currentUser.getMajor())+ " Từ Vựng");
+        }
     }
 
     @FXML
     void onEditProfile() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Profile/Editprofile.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnTest.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("REFRESS");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -140,9 +163,7 @@ public class DashboardController {
             List<Vocabulary> newWords = vocabDAO.getNewVocabularies(currentUser.getId(), currentUser.getMajor());
             if (newWords == null || newWords.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông báo");
-                alert.setHeaderText(null);
-                alert.setContentText("Không tìm thấy từ vựng mới nào cho chuyên ngành này!");
+                alert.setTitle("ERROR");
                 alert.showAndWait();
                 return;
             }
@@ -202,6 +223,16 @@ public class DashboardController {
 
     @FXML
     void onSpeaking() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Speaking/Speaking.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) lblUsername.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Test");
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -218,7 +249,19 @@ public class DashboardController {
         }
     }
 
-
+    @FXML
+    void onOpenUserList() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Authentication/UserList.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnAdmin.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("ADMIN");
+            stage.centerOnScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

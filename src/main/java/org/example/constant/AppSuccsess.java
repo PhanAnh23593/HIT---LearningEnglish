@@ -26,4 +26,8 @@ public interface AppSuccsess {
 
     String REVIEW_QUIZ_COMPLETE = "Bạn đã ôn tập thành công bài tập dạng Quiz ";
     String REVIEW_GOOD = "Tuyệt vời !";
+
+    String SUCCSESS_CHANGE_PASSWORD = "Đổi mật khẩu thành công!";
+    String SUCCESS_INFORMATION_CHANGE = "Cập nhật hồ sơ thành công!";
+
 }

@@ -24,8 +24,6 @@ public interface AppMessage {
     String ALERT_REVIEW_NOTSTART = "Bạn hãy học từ vựng trước để sử dụng chức năng này";
     String ALER_REVIEW_NOTDATA = "Chưa có từ vựng nào bạn đã được học";
 
-    //REVIEW - FLASHCARD
-
-
-
+    //CHANGE PASSWORD
+    String INFORMATION_EMPTY_WARNING = "Vui lòng nhập đầy đủ thông tin!";
 }

@@ -23,4 +23,6 @@ module org.example {
     opens org.example.controller.Authentication to javafx.fxml;
     exports org.example.controller.Test;
     opens org.example.controller.Test to javafx.fxml;
+    opens org.example.controller.Profile to javafx.fxml;
+    opens org.example.controller.Speaking to javafx.fxml;
 }
