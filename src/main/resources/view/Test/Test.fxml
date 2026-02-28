@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Test.TestController">
+
+    <top>
+        <VBox spacing="15.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="30.0" right="30.0" top="20.0" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onBack" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor: hand;" text="← Thoát bài thi" />
+                        <Label text="Bài Kiểm Tra Tổng Hợp" textFill="#2c3e50">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="15.0">
+                    <children>
+                        <ProgressBar fx:id="lbprogress" prefHeight="15.0" prefWidth="600.0" progress="0.0" style="-fx-accent: #2ecc71;" />
+                        <Label fx:id="lbprogresstag" text="1/20" textFill="#7f8c8d">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="40.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="40.0" left="60.0" right="60.0" top="20.0" />
+            </padding>
+            <children>
+
+                <VBox alignment="CENTER" prefHeight="220.0" prefWidth="680.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                    <children>
+                        <Label fx:id="lbTitle" text="Chọn nghĩa của từ sau:" textFill="#95a5a6">
+                            <font>
+                                <Font name="System Italic" size="18.0" />
+                            </font>
+                        </Label>
+
+                        <Label fx:id="lbQuestion" text="Word" textAlignment="CENTER" textFill="#2c3e50" wrapText="true">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+
+                        <Button fx:id="btnAudio" mnemonicParsing="false" onAction="#playAudioManual" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;" text="🔊 Nghe lại" visible="false">
+                            <padding>
+                                <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+                            </padding>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+
+                <GridPane alignment="CENTER" hgap="25.0" vgap="25.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="btnA" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onbtnA" prefHeight="70.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-font-size: 16px;" text="Đáp án A" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+                        <Button fx:id="btnB" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onbtnB" prefHeight="70.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-font-size: 16px;" text="Đáp án B" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Button fx:id="btnC" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onbtnC" prefHeight="70.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-font-size: 16px;" text="Đáp án C" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                        <Button fx:id="btnD" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onbtnD" prefHeight="70.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand; -fx-font-size: 16px;" text="Đáp án D" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    </children>
+                </GridPane>
+
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

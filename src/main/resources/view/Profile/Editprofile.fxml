@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="480.0" style="-fx-background-color: #f4f7f6;" stylesheets="@../../css/editprofile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.Profile.EditProfileController">
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="35.0" layoutY="35.0" prefHeight="630.0" prefWidth="410.0" spacing="20.0" styleClass="profile-card">
+            <children>
+                <Label styleClass="header-label" text="HỒ SƠ CỦA TÔI" />
+
+                <VBox alignment="CENTER" spacing="10.0">
+                    <children>
+                        <StackPane minHeight="130.0" minWidth="130.0" maxHeight="130.0" maxWidth="130.0" prefHeight="130.0" prefWidth="130.0" styleClass="avatar-holder">
+                            <children>
+                                <ImageView fx:id="imgAvatar" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="false" />
+                            </children>
+                        </StackPane>
+                        <Button mnemonicParsing="false" onAction="#onChangeAvatar" styleClass="button-modern, btn-upload" text="Chọn ảnh mới" />
+                    </children>
+                </VBox>
+
+                <VBox prefWidth="100.0" spacing="12.0">
+                    <children>
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Tên hiển thị" textFill="#7f8c8d"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                <TextField fx:id="txtFullName" prefHeight="45.0" styleClass="text-field-modern" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Số điện thoại" textFill="#7f8c8d"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                <TextField fx:id="txtPhone" prefHeight="45.0" styleClass="text-field-modern" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Email" textFill="#7f8c8d"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                <TextField fx:id="txtEmail" prefHeight="45.0" styleClass="text-field-modern" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Ngày sinh" textFill="#7f8c8d"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                <DatePicker fx:id="dpBirthDay" prefHeight="45.0" prefWidth="410.0" />
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </VBox>
+
+                <Button mnemonicParsing="false" onAction="#onChangePassword" prefHeight="40.0" prefWidth="200.0" styleClass="button-modern, btn-action" text="ĐỔI MẬT KHẨU">
+                    <VBox.margin><Insets top="10.0" /></VBox.margin>
+                </Button>
+
+                <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #fafafa; -fx-background-radius: 0 0 15 15;">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#onCancel" prefHeight="40.0" prefWidth="120.0" styleClass="button-modern, btn-cancel" text="Hủy" />
+                        <Button mnemonicParsing="false" onAction="#onSave" prefHeight="40.0" prefWidth="150.0" styleClass="button-modern, btn-save" text="Lưu thay đổi" />
+                    </children>
+                    <VBox.margin><Insets top="10.0" /></VBox.margin>
+                </HBox>
+            </children>
+            <padding><Insets top="20.0" /></padding>
+        </VBox>
+    </children>
+</AnchorPane>
